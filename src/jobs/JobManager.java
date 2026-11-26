@@ -8,14 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 
-/**
- * Manages the lifecycle of job vacancies (creation, viewing, updating, deactivating).
- * Concepts used:
- * - LinkedHashMap (preserves insertion order of jobs)
- * - ArrayList (to return lists of jobs)
- * - Custom Exceptions (InvalidInputException)
- * - Simple loops and if-else logic
- */
 public class JobManager implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -27,7 +19,7 @@ public class JobManager implements Serializable {
         this.jobCounter = 101;
     }
 
-    // Creates a new job posting with validation
+
     public Job createJob(String recruiterId, String title, String company,
                          String description, ArrayList<String> requiredSkills,
                          double minCgpa, int minExperience, String location)
@@ -61,7 +53,7 @@ public class JobManager implements Serializable {
         return job;
     }
 
-    // Updates existing job specifications
+
     public boolean updateJob(String jobId, String title, String description,
                              ArrayList<String> requiredSkills, double minCgpa,
                              int minExperience, String location, boolean active)
@@ -96,7 +88,7 @@ public class JobManager implements Serializable {
         return true;
     }
 
-    // Soft delete: deactivates job so candidate application history remains intact
+    
     public boolean deleteJob(String jobId) {
         Job job = jobsMap.get(jobId);
         if (job != null) {
@@ -106,18 +98,18 @@ public class JobManager implements Serializable {
         return false;
     }
 
-    // Lookup job by ID
+
     public Job getJobById(String jobId) {
         if (jobId == null) return null;
         return jobsMap.get(jobId.trim().toUpperCase());
     }
 
-    // Returns all jobs
+
     public ArrayList<Job> getAllJobs() {
         return new ArrayList<Job>(jobsMap.values());
     }
 
-    // Returns only active jobs that are open for applications
+    
     public ArrayList<Job> getActiveJobs() {
         ArrayList<Job> activeList = new ArrayList<Job>();
         for (Job j : jobsMap.values()) {
@@ -128,7 +120,7 @@ public class JobManager implements Serializable {
         return activeList;
     }
 
-    // Returns jobs created by a specific recruiter
+
     public ArrayList<Job> getJobsByRecruiter(String recruiterId) {
         ArrayList<Job> list = new ArrayList<Job>();
         if (recruiterId == null) return list;
@@ -141,7 +133,6 @@ public class JobManager implements Serializable {
         return list;
     }
 
-    // Restores jobs from saved file state
     public void restoreJobs(Collection<Job> loadedJobs) {
         jobsMap.clear();
         if (loadedJobs == null) return;

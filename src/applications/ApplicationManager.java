@@ -9,14 +9,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 
-/**
- * Manages the candidate application workflow and enforces business rules
- * such as strictly preventing duplicate applications for the same job vacancy.
- * Concepts used:
- * - LinkedHashMap and ArrayList
- * - Custom Exception (DuplicateApplicationException)
- * - Simple loop and if-else logic
- */
 public class ApplicationManager implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -28,7 +20,7 @@ public class ApplicationManager implements Serializable {
         this.applicationCounter = 101;
     }
 
-    // Checks if candidate has already applied for this job using a simple for-each loop
+
     public boolean hasCandidateApplied(String candidateId, String jobId) {
         if (candidateId == null || jobId == null) {
             return false;
@@ -42,7 +34,7 @@ public class ApplicationManager implements Serializable {
         return false;
     }
 
-    // Submits an application for a candidate, throwing DuplicateApplicationException if already applied
+   
     public Application applyForJob(String candidateId, String jobId)
             throws DuplicateApplicationException, InvalidInputException {
 
@@ -56,7 +48,7 @@ public class ApplicationManager implements Serializable {
         String cleanCandidateId = candidateId.trim().toUpperCase();
         String cleanJobId = jobId.trim().toUpperCase();
 
-        // Check for duplicate application
+
         if (hasCandidateApplied(cleanCandidateId, cleanJobId)) {
             throw new DuplicateApplicationException("Candidate " + cleanCandidateId +
                     " has already applied for Job " + cleanJobId + ".");
@@ -70,13 +62,13 @@ public class ApplicationManager implements Serializable {
         return application;
     }
 
-    // Retrieve an application by its unique ID
+
     public Application getApplicationById(String applicationId) {
         if (applicationId == null) return null;
         return applicationsMap.get(applicationId.trim().toUpperCase());
     }
 
-    // Get all applications submitted by a specific candidate
+    
     public ArrayList<Application> getApplicationsByCandidate(String candidateId) {
         ArrayList<Application> list = new ArrayList<Application>();
         if (candidateId == null) return list;
@@ -89,7 +81,7 @@ public class ApplicationManager implements Serializable {
         return list;
     }
 
-    // Get all applications submitted for a specific job
+    
     public ArrayList<Application> getApplicationsByJob(String jobId) {
         ArrayList<Application> list = new ArrayList<Application>();
         if (jobId == null) return list;
@@ -102,7 +94,6 @@ public class ApplicationManager implements Serializable {
         return list;
     }
 
-    // Updates application status and remarks
     public boolean updateStatus(String applicationId, ApplicationStatus newStatus, String remarks) {
         Application app = getApplicationById(applicationId);
         if (app != null && newStatus != null) {
@@ -115,12 +106,12 @@ public class ApplicationManager implements Serializable {
         return false;
     }
 
-    // Returns all applications
+
     public ArrayList<Application> getAllApplications() {
         return new ArrayList<Application>(applicationsMap.values());
     }
 
-    // Restores applications from file state
+
     public void restoreApplications(Collection<Application> loadedApplications) {
         applicationsMap.clear();
         if (loadedApplications == null) return;

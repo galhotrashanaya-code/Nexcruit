@@ -4,14 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-/**
- * Represents a Job Vacancy posted by a Recruiter.
- * Encapsulates required skills, minimum CGPA eligibility, and job specifications.
- * Concepts used:
- * - Encapsulation (private fields with getters and setters)
- * - ArrayList (list of required skills)
- * - Serializable
- */
 public class Job implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -47,13 +39,12 @@ public class Job implements Serializable {
         this.postedDate = LocalDate.now().toString();
     }
 
-    // Prints a single line summary of the job opening
+
     public void displaySummary() {
         System.out.printf("[%s] %-25s | Company: %-18s | Min CGPA: %-4.2f | Exp: %d yr(s) | Status: %s%n",
                 jobId, title, company, minCgpa, minExperience, (active ? "ACTIVE" : "CLOSED"));
     }
 
-    // Prints complete details of the job opening
     public void displayDetails() {
         System.out.println("================================================================================");
         System.out.println(" Job ID           : " + jobId);
@@ -70,7 +61,7 @@ public class Job implements Serializable {
         System.out.println("================================================================================");
     }
 
-    // Getters and Setters
+
     public String getJobId() {
         return jobId;
     }

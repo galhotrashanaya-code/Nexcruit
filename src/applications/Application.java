@@ -4,15 +4,6 @@ import utils.ApplicationStatus;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
-/**
- * Represents an Application submitted by a Candidate for a Job.
- * Tracks lifecycle status, matching score, and eligibility flags.
- * Concepts used:
- * - Encapsulation (private fields with getters and setters)
- * - Enum (ApplicationStatus)
- * - Serializable
- */
 public class Application implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -36,13 +27,11 @@ public class Application implements Serializable {
         this.remarks = "Application received and queued for screening.";
     }
 
-    // Display summary line in console tables
     public void displaySummary() {
         System.out.printf("[%s] Job: %-8s | Candidate: %-8s | Match: %5.1f%% | CGPA OK: %-5s | Status: %s%n",
                 applicationId, jobId, candidateId, matchScore, (cgpaEligible ? "YES" : "NO"), status.name());
     }
 
-    // Getters and Setters
     public String getApplicationId() {
         return applicationId;
     }
